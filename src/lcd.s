@@ -334,9 +334,9 @@ GFX_reset:	@called with CPU reset
 	@get GBC palette
 	ldr_ r0,memmap_tbl
 	blx_long GetGbcPaletteNumber
-	@if zero, pick Wario Blast palette
+	@if zero, pick greyscale
 	cmp r0,#0
-	moveq r0,#74
+	moveq r0,#01
 	ldr r1,=palettebank
 	strb r0,[r1]
 	bl paletteinit
@@ -4573,6 +4573,7 @@ FF4F_W_:
 FF4F_R:@		VBK - VRAM Bank - CGB Mode Only
 @----------------------------------------------------------------------------
 	ldrb_ r0,vrambank
+	orr r0,r0,#0xfe
 	mov pc,lr
 
 @----------------------------------------------------------------------------
